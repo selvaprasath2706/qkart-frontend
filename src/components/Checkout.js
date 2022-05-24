@@ -338,35 +338,35 @@ const Checkout = () => {
    *      "message": "Protected route, Oauth2 Bearer token not found"
    * }
    */
-  const deleteAddress = async (token, addressId) => {
-    try {
-      // TODO: CRIO_TASK_MODULE_CHECKOUT - Delete selected address from the backend and display the latest list of addresses
-console.log("delete address")
-const response = await axios.delete(
-  `${config.endpoint}/user/addresses/`+addressId,
+//   const deleteAddress = async (token, addressId) => {
+//     try {
+//       // TODO: CRIO_TASK_MODULE_CHECKOUT - Delete selected address from the backend and display the latest list of addresses
+// console.log("delete address")
+// const response = await axios.delete(
+//   `${config.endpoint}/user/addresses/`+addressId,
 
-  {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
-);
-setAddresses({...addresses,all:response.data});
-console.log(response.data)
+//   {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   }
+// );
+// setAddresses({...addresses,all:response.data});
+// console.log(response.data)
 
-    } catch (e) {
-      if (e.response) {
-        enqueueSnackbar(e.response.data.message, { variant: "error" });
-      } else {
-        enqueueSnackbar(
-          "Could not delete this address. Check that the backend is running, reachable and returns valid JSON.",
-          {
-            variant: "error",
-          }
-        );
-      }
-    }
-  };
+//     } catch (e) {
+//       if (e.response) {
+//         enqueueSnackbar(e.response.data.message, { variant: "error" });
+//       } else {
+//         enqueueSnackbar(
+//           "Could not delete this address. Check that the backend is running, reachable and returns valid JSON.",
+//           {
+//             variant: "error",
+//           }
+//         );
+//       }
+//     }
+//   };
 
   // TODO: CRIO_TASK_MODULE_CHECKOUT - Validate request for checkout
   /**
