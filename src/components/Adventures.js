@@ -133,35 +133,35 @@ const Adventures = () => {
    * API endpoint - "GET /products/search?value=<search-query>"
    *
    */
-  const performSearch = async (text) => {
+  // const performSearch = async (text) => {
 
-    try {
-      const response = await axios.get(
-        `${config.endpoint}/products/search?value=${text}`
-      );
-      setFilteredProducts(response.data);
-      return response.data;
-    } catch (e) {
-      if (e.response) {
-        if (e.response.status === 404) {
-          setFilteredProducts([]);
-        }
+  //   try {
+  //     const response = await axios.get(
+  //       `${config.endpoint}/products/search?value=${text}`
+  //     );
+  //     setFilteredProducts(response.data);
+  //     return response.data;
+  //   } catch (e) {
+  //     if (e.response) {
+  //       if (e.response.status === 404) {
+  //         setFilteredProducts([]);
+  //       }
 
-        if (e.response.status === 500) {
-          enqueueSnackbar(e.response.data.message, { variant: "error" });
-          setFilteredProducts(products);
-        }
-      } else {
-        enqueueSnackbar(
-          "Could not fetch products. Check that the backend is running, reachable and returns valid JSON.",
-          {
-            variant: "error",
-          }
-        );
-      }
-    }
+  //       if (e.response.status === 500) {
+  //         enqueueSnackbar(e.response.data.message, { variant: "error" });
+  //         setFilteredProducts(products);
+  //       }
+  //     } else {
+  //       enqueueSnackbar(
+  //         "Could not fetch products. Check that the backend is running, reachable and returns valid JSON.",
+  //         {
+  //           variant: "error",
+  //         }
+  //       );
+  //     }
+  //   }
 
-  };
+  // };
 
   // TODO: CRIO_TASK_MODULE_PRODUCTS - Optimise API calls with debounce search implementation
   /**
