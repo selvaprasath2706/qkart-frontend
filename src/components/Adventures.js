@@ -184,13 +184,22 @@ const Adventures = () => {
     }
 
     const timeout = setTimeout(() => {
-      performSearch(value);
+      search(value);
     }, 500);
 
     setDebounceTimeout(timeout);
 
   };
 
+
+  const search = (text) => {
+    console.log(text)
+    setFilteredProducts(products.filter(
+     (product) =>
+       product.name.toUpperCase().includes(text.toUpperCase()) ||
+       product.category.toUpperCase().includes(text.toUpperCase())
+   ))
+   };
   // useEffect(() => {
   //   performAPICall();
   //   // eslint-disable-next-line react-hooks/exhaustive-deps

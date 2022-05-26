@@ -129,6 +129,16 @@ const Products = () => {
    * API endpoint - "GET /products/search?value=<search-query>"
    *
    */
+   const search = (text) => {
+     console.log(text)
+     setFilteredProducts(products.filter(
+      (product) =>
+        product.name.toUpperCase().includes(text.toUpperCase()) ||
+        product.category.toUpperCase().includes(text.toUpperCase())
+    ))
+    };
+
+
   const performSearch = async (text) => {
 
     try {
@@ -180,7 +190,8 @@ const Products = () => {
     }
 
     const timeout = setTimeout(() => {
-      performSearch(value);
+      //performSearch(value);
+      search(value)
     }, 500);
 
     setDebounceTimeout(timeout);
