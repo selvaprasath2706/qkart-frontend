@@ -1,4 +1,4 @@
-import { CreditCard, Delete } from "@mui/icons-material";
+import { CreditCard } from "@mui/icons-material";
 import {
   Button,
   Divider,
@@ -110,7 +110,7 @@ const AddNewAddressView = ({
             addAddress(token,newAddress.value)
           }}
         >
-          Add
+          Update Address
         </Button>
         <Button
           variant="text"
@@ -636,9 +636,10 @@ const Checkout = () => {
                       setAddresses({...addresses,selected:addresses.all
                       })
                     }}>
-              {addresses.all}<Button startIcon={<Delete />} onClick={()=>{
+              {addresses.all}
+              {/* <Button startIcon={<Delete />} onClick={()=>{
                 // deleteAddress(token,addressval._id)
-              }}>Delete</Button>
+              }}>Delete</Button> */}
               </Typography>
                      {/* {
                     addresses.all.map((addressval)=>(
