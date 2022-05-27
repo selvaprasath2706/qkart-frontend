@@ -283,15 +283,14 @@ const Checkout = () => {
       setNewAddress({
         value:"",
         isAddingNewAddress: false})
-      setAddresses({all:response.data,
-        isAddingNewAddress: false});
-    
+        setAddresses({ ...addresses, all: response.data.address });
+     
     } catch (e) {
       setNewAddress({
         value:"",
         isAddingNewAddress: false})
       console.log(e)
-      if (e.response) {
+      if (e.response) {   
         enqueueSnackbar(e.response.data.message, { variant: "error" });
       } else {
         enqueueSnackbar(
@@ -694,7 +693,7 @@ const Checkout = () => {
                   }));
                 }}
               >
-                Add new address
+                Update address
             </Button>):(<AddNewAddressView
                 token={token}
                 newAddress={newAddress}
