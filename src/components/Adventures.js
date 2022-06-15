@@ -42,13 +42,13 @@ import Cart, { generateCartItemsFrom } from "./Cart";
 
 const Adventures = () => {
   let {adventureId}=useParams()
-  console.log(adventureId)
   const [items, setItems] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   // NOTE - Needs to be state as timer value is to be persisted across renders
   const [debounceTimeout, setDebounceTimeout] = useState(0);
   const [isLoading, setLoading] = useState(false);
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);  
+  const [allproducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const token = localStorage.getItem("token");
 
@@ -89,13 +89,52 @@ const Adventures = () => {
    *      "message": "Something went wrong. Check the backend console for more details"
    * }
    */
+
+   const performAPICall1 = async () => {
+
+    setLoading(true);
+
+    try {
+      const response = await axios.get(`${config.endpoint}/products/adventure/${adventureId}`);
+      const response1 = await axios.get(`${config.endpoint}/products`);
+
+      setAllProducts(response1.data)
+      console.log("dataaa sasa",response1.data)
+      console.log(allproducts)
+      setLoading(false);
+      console.log(response.data.products)
+      setProducts(response.data.products);
+      setFilteredProducts(response.data.products);
+      return response1.data;
+    } catch (e) {
+      setLoading(false);
+      console.log("err",e)
+      if (e.response && e.response.status === 500) {
+        enqueueSnackbar(e.response.data.message, { variant: "error" });
+        return null;
+      } else {
+        enqueueSnackbar(
+          "Could not fetch products. Check that the backend is running, reachable and returns valid JSON.",
+          {
+            variant: "error",
+          }
+        );
+      }
+    }
+
+  };
+
   const performAPICall = async () => {
 
     setLoading(true);
 
     try {
       const response = await axios.get(`${config.endpoint}/products/adventure/${adventureId}`);
+      const response1 = await axios.get(`${config.endpoint}/products`);
 
+      setAllProducts(response1.data)
+      console.log("dataaa sasa",response1.data)
+      console.log(allproducts)
       setLoading(false);
       console.log(response.data.products)
       setProducts(response.data.products);
@@ -103,7 +142,7 @@ const Adventures = () => {
       return response.data.products;
     } catch (e) {
       setLoading(false);
-
+      console.log("err",e)
       if (e.response && e.response.status === 500) {
         enqueueSnackbar(e.response.data.message, { variant: "error" });
         return null;
@@ -246,6 +285,7 @@ const Adventures = () => {
       return response.data;
   
     } catch (e) {
+      console.log("hi")
       if (e.response && e.response.status === 400) {
         enqueueSnackbar(e.response.data.message, { variant: "error" });
       } else {
@@ -261,8 +301,8 @@ const Adventures = () => {
   };
 
   const updateCartItems = (cartData, products) => {
-    console.log(cartData,products)
-    const cartItems = generateCartItemsFrom(cartData, products);
+    console.log("cartData",allproducts);
+    const cartItems = generateCartItemsFrom(cartData, allproducts);
     setItems(cartItems);
   };
 
@@ -405,7 +445,7 @@ const Adventures = () => {
       );
       return;
     }
-
+    
     try {
       console.log(productId,qty)
       const response = await axios.put(
@@ -447,9 +487,11 @@ console.log(response.data, products)
   useEffect(() => {
     const onLoadHandler = async () => {
       const productsData = await performAPICall();
+      console.log("producrs data",productsData)
+      const allprdts = await performAPICall1();
       const cartData = await fetchCart(token);
-      console.log(productsData)
-      const cartDetails = await generateCartItemsFrom(cartData, productsData);
+      console.log("products data",allprdts)
+      const cartDetails = await generateCartItemsFrom(cartData, allprdts);
 
       setItems(cartDetails);
     };
