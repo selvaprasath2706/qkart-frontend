@@ -393,10 +393,9 @@ const Checkout = () => {
    *
    */
   const validateRequest = (items, addresses) => {
-    if(getTotalCartValue(items)<=localStorage.getItem("balance")){
+    // if(getTotalCartValue(items)<=localStorage.getItem("balance")){
       if(addresses.all.length>0){
         if(addresses.selected){
-          console.log("true")
           return true;
         } 
         else{
@@ -418,15 +417,15 @@ const Checkout = () => {
         );
         // console.log( "Please add a new address before proceeding.")
       }
-    }else{
-      enqueueSnackbar(
-        "You do not have enough balance in your wallet for this purchase",
-        {
-          variant: "error",
-        }
-      );
-      // console.log("You do not have enough balance in your wallet for this purchase")
-    }
+    // }else{
+    //   enqueueSnackbar(
+    //     "You do not have enough balance in your wallet for this purchase",
+    //     {
+    //       variant: "error",
+    //     }
+    //   );
+    //   // console.log("You do not have enough balance in your wallet for this purchase")
+    // }
     return false;
   };
 
@@ -713,8 +712,9 @@ const Checkout = () => {
             <Box my="1rem">
               <Typography>Wallet</Typography>
               <Typography>
-                Pay ${getTotalCartValue(items)} of available $
-                {localStorage.getItem("balance")}
+                Pay ₹{getTotalCartValue(items)} 
+                {/* of available $
+                {localStorage.getItem("balance")} */}
               </Typography>
             </Box>
 
