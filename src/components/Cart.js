@@ -246,7 +246,7 @@ const Cart = ({
                      
                     />
                     <Box padding="0.5rem" fontWeight="700">
-                      ${item.cost}
+                      ₹{item.cost}
                     </Box>
                   </Box>
                 </Box>
@@ -270,7 +270,7 @@ const Cart = ({
             alignSelf="center"
             data-testid="cart-total"
           >
-            ${getTotalCartValue(items)}
+            ₹{getTotalCartValue(items)}
           </Box>
         </Box>
         {hasCheckoutButton && (
@@ -296,15 +296,15 @@ const Cart = ({
           </Box>
           <Box className="cart-row">
             <p>Subtotal</p>
-            <p>${getTotalCartValue(items)}</p>
+            <p>₹{getTotalCartValue(items)}</p>
           </Box>
           <Box className="cart-row">
             <p>Shipping Charges</p>
-            <p>$0</p>
+            <p>₹0</p>
           </Box>
           <Box className="cart-row" fontSize="1.25rem" fontWeight="700">
             <p>Total</p>
-            <p>${getTotalCartValue(items)}</p>
+            <p>₹{getTotalCartValue(items)}</p>
           </Box>
         </Box>
       )}
